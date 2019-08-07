@@ -32,7 +32,9 @@ public class Robot extends TimedRobot {
   private VictorSP leftmotor = new VictorSP(0);
   private VictorSP rightmotor = new VictorSP(1);
   private VictorSP conveyormotor = new VictorSP(3);
- private Joystick trigger = new Joystick(1);
+  private JoystickButton button1 = new JoystickButton(m_stick, 1);
+  
+  
   
 
   /**
@@ -43,6 +45,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
     camera.setResolution(320, 240);
+    boolean ConveyorRun = false;
+    boolean togglePressed = false;
   }
 
   /**
@@ -98,12 +102,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    //updateToggle();
+   // if (ConveyorRun){
+     // conveyormotor.(.5);
+    
 
-    if (m_stick.getX() < 0.5 ) {
-    m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getX());
-  } else {
-    m_robotDrive.stopMotor();
-  }
+   if ((m_stick.getX() < -0.06 || m_stick.getX() > 0.06) && (m_stick.getY() < -0.06 || m_stick.getY() > 0.06)) {
+     m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getX());
+   }
   //m_stick.getTrigger
   
 }  
